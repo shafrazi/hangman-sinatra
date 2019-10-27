@@ -4,18 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/styles.css">
   <title>Hangman</title>
 </head>
 <body>
-  <h1>Hangman</h1>
-  <h3><%= game.display %></h3>
-  <h3><%= game.no_of_guesses %></h3>
-  <h3><%= game.incorrect_guesses %></h3>
-  <form action="/" method="post">
-    <input type="text" name="guess" id="guess">
-    <input type="submit" value="Guess!">
+  <h1 class="center">Hangman</h1>
+  <img class= "center" src="images/<%= image_setter(i) if image_setter(i)%>.jpg" alt="">
+  <div class="center">
+    <h1 id="display-word"><%= game.display %></h1>
+    <div class= "guess_no">Remaining guesses: <%= game.no_of_guesses %></div>
+    <h3><%= "Incorrect guesses: #{game.incorrect_guesses.join(", ")}" if game.incorrect_guesses.any? %></h3>
+  </div>
+  
+  <form class= "center" action="/" method="post">
+    <input type="text" name="guess" id="guess" placeholder="Enter a letter or the complete word" autofocus>
+    <input type="submit" value="Guess!" id="submit">
   </form>
-  <a href="/new">New Game</a>
+  <br>
+  <a class= "center" href="/new">New Game</a>
 </body>
 </html>

@@ -9,9 +9,11 @@ end
 enable :sessions
 
 game = GameController.new("dictionary.txt")
+i = 0
 
 get "/" do
-  erb :index, locals: { game: game }
+  i += 1 if i < 6
+  erb :index, locals: { game: game, i: i }
 end
 
 post "/" do
@@ -22,5 +24,10 @@ end
 
 get "/new" do
   game = GameController.new("dictionary.txt")
+  i = 0
   redirect "/"
+end
+
+def image_setter(i)
+  "hangman#{i}"
 end

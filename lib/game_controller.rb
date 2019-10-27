@@ -6,7 +6,7 @@ class GameController
     @word = generate_word(dictionary_file)
     @display_word = hide_word(@word)
     @game_over = false
-    @no_of_guesses = 10
+    @no_of_guesses = 5
     @incorrect_guesses = []
     @incorrect_no = 0
   end
@@ -25,7 +25,7 @@ class GameController
       display_word.split("").join("   ")
     elsif @game_won
       "Congratulations! You successfully guessed the word!"
-    else
+    elsif @no_of_guesses == 0
       "Game over! The word is : #{word.split("").join("  ")}"
     end
   end
@@ -35,7 +35,7 @@ class GameController
   end
 
   def check_length(word)
-    if word.length >= 5 && word.length < 12
+    if word.length >= 5 && word.length < 8
       false
     else
       true
@@ -43,7 +43,7 @@ class GameController
   end
 
   def hide_word(word)
-    "-" * word.length
+    "_" * word.length
   end
 
   def check_guess(input)
@@ -75,9 +75,11 @@ class GameController
       @no_of_guesses -= 1
       if input == word || display_word == word
         @game_won = true
+        @game_over = true
       end
     else
       @game_lost = true
+      @game_over = true
     end
   end
 end
